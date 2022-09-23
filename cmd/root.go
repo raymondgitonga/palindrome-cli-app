@@ -3,44 +3,34 @@ package cmd
 import (
 	"fmt"
 	"github.com/raymondgitonga/palindrome-cli-app/internal"
-	"os"
-
 	"github.com/spf13/cobra"
 )
 
-// palindromeCmd represents the palindrome command
-var palindromeCmd = &cobra.Command{
-	Use:   "palindrome",
-	Short: "Checks is a a word entered is a palindrome",
-	Long:  `Checks is a a word entered is a palindrome`,
-	Run: func(cmd *cobra.Command, args []string) {
-		word, err := cmd.Flags().GetString("word")
+func RunPalindromeCommand(flag string) *cobra.Command {
+	command := &cobra.Command{
+		Use:   "palindrome",
+		Short: "Checks is a a word entered is a palindrome",
+		Long:  `Checks is a a word entered is a palindrome`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			word, err := cmd.Flags().GetString(flag)
 
-		if err != nil {
-			fmt.Printf("Error reading word flag: %v ", err)
-			return
-		}
+			if err != nil {
+				return fmt.Errorf("Error reading word flag: %v ", err)
+			}
 
-		if len(word) <= 0 {
-			fmt.Printf("Kindly add flag --word. Example  go run main.go palindrome --word={word you want to check}")
-			return
-		}
+			if len(word) <= 0 {
+				return fmt.Errorf("Kindly add flag --word. Example  go run main.go palindrome --word={word you want to check}")
+			}
 
-		result := checkIsPalindrome(word)
+			result := checkIsPalindrome(word)
 
-		fmt.Println(result)
-	},
-}
-
-func init() {
-	palindromeCmd.PersistentFlags().String("word", "", "Check if word is a palindrome")
-}
-
-func Execute() {
-	err := palindromeCmd.Execute()
-	if err != nil {
-		os.Exit(1)
+			fmt.Println(result)
+			return nil
+		},
 	}
+	command.PersistentFlags().String(flag, "", "Check if word is a palindrome")
+
+	return command
 }
 
 func checkIsPalindrome(word string) string {
