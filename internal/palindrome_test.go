@@ -7,22 +7,16 @@ import (
 )
 
 func Test_IsPalindrome(t *testing.T) {
-	type testCase struct {
+	testCases := []struct {
 		input  string
 		result bool
-	}
-
-	testCases := []testCase{
+	}{
 		{
 			input:  "john",
 			result: false,
 		},
 		{
 			input:  "racecar",
-			result: true,
-		},
-		{
-			input:  "",
 			result: true,
 		},
 	}

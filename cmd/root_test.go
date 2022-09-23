@@ -10,13 +10,11 @@ import (
 
 func TestRootCmd(t *testing.T) {
 	var result string
-	type testCase struct {
+	testCases := []struct {
 		input  string
 		result string
 		err    error
-	}
-
-	testCases := []testCase{
+	}{
 		{
 			input:  "word",
 			result: "This is not a palindrome.",
