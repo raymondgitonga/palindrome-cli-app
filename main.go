@@ -1,6 +1,3 @@
-/*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-*/
 package main
 
 import (
@@ -9,12 +6,10 @@ import (
 )
 
 func main() {
-	command := cmd.RunPalindromeCommand("word")
-	command.PersistentFlags().String("word", "", "Check if word is a palindrome")
-	err := command.Execute()
+	err := cmd.RunPalindromeCommand("word")
 
 	if err != nil {
-		fmt.Printf("Error running palindrome command %s\n", err)
+		fmt.Println(err)
 	}
 
 }

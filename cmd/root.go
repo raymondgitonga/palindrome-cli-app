@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func RunPalindromeCommand(flag string) *cobra.Command {
+func RunPalindromeCommand(flag string) error {
 	command := &cobra.Command{
 		Use:   "palindrome",
 		Short: "Checks is a a word entered is a palindrome",
@@ -22,7 +22,7 @@ func RunPalindromeCommand(flag string) *cobra.Command {
 				return fmt.Errorf("Kindly add flag --word. Example  go run main.go palindrome --word={word you want to check}")
 			}
 
-			result := checkIsPalindrome(word)
+			result := CheckIsPalindrome(word)
 
 			fmt.Println(result)
 			return nil
@@ -30,10 +30,15 @@ func RunPalindromeCommand(flag string) *cobra.Command {
 	}
 	command.PersistentFlags().String(flag, "", "Check if word is a palindrome")
 
-	return command
+	err := command.Execute()
+
+	if err != nil {
+		return fmt.Errorf("Error running palindrome command %s\n", err)
+	}
+	return nil
 }
 
-func checkIsPalindrome(word string) string {
+func CheckIsPalindrome(word string) string {
 	if internal.IsPalindrome(word) {
 		return "This is for sure a palindrome."
 	}

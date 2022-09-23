@@ -1,6 +1,7 @@
-package internal
+package internal_test
 
 import (
+	"github.com/raymondgitonga/palindrome-cli-app/internal"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -28,7 +29,7 @@ func Test_IsPalindrome(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.input, func(t *testing.T) {
-			isPalindrome := IsPalindrome(tc.input)
+			isPalindrome := internal.IsPalindrome(tc.input)
 			assert.Equal(t, tc.result, isPalindrome)
 		})
 	}
