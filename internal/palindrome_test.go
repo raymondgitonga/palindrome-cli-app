@@ -23,7 +23,8 @@ func Test_IsPalindrome(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.input, func(t *testing.T) {
-			isPalindrome := internal.IsPalindrome(tc.input)
+			newPalindrome := internal.NewPalindrome(tc.input)
+			isPalindrome := newPalindrome.IsPalindrome()
 			assert.Equal(t, tc.result, isPalindrome)
 		})
 	}

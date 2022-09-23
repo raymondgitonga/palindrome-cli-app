@@ -39,7 +39,9 @@ func RunPalindromeCommand(flag string) error {
 }
 
 func CheckIsPalindrome(word string) string {
-	if internal.IsPalindrome(word) {
+	newPalindrome := internal.NewPalindrome(word)
+
+	if newPalindrome.IsPalindrome() {
 		return "This is for sure a palindrome."
 	}
 	return "This is not a palindrome."
