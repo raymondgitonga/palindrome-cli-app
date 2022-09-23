@@ -1,0 +1,8 @@
+Go Cli app that checks if inputted word is a palindrome or not
+# macos
+.DS_Store
+# coverage output
+*.out
+# IntelliJ
+.idea/
+build/
